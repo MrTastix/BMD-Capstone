@@ -1,0 +1,45 @@
+body {
+    font-family: "Oswald", sans-serif;
+    background: #1a1a1d;
+    color: #fff;
+    font-size: 32px;
+    text-transform: uppercase;
+    padding: 90px;
+  }
+  
+  .splittext {
+    margin-bottom: 30px;
+  }
+  
+  h1 {
+    padding: 0;
+    margin: 0;
+  }
+  
+  h1 span {
+    color: orange;
+  }
+
+  .secondline {
+    display: flex;
+    align-items: flex-end;
+  }
+  
+  .dying {
+    color: hotpink;
+    font-size: 1.5em;
+    margin-left: 30px;
+  }
+  
+  button {
+    font-size: 20px;
+    text-transform: uppercase;
+    background: transparent;
+    background: #47cf73;
+    color: #333;
+    padding: 20px;
+    letter-spacing: 3px;
+    font-weight: 600;
+    border: none;
+  }
+  
