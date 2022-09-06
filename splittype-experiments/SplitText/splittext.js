@@ -1,4 +1,4 @@
-let tl = new TimelineLite(),
+let tl = gsap.timeline(),
   firstLine = new SplitText(".firstline", { type: "words, lines, chars" });
   secondLine = new SplitText(".secondline", { type: "words, lines, chars" });
   dying = new SplitText(".dying", { type: "words, lines, chars", position:"absolute" });

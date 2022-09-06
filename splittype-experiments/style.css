@@ -1,3 +1,7 @@
+.target {
+  font-kerning: none;
+}
+
 body {
     font-family: "Oswald", sans-serif;
     background: #1a1a1d;
@@ -7,7 +11,7 @@ body {
     padding: 90px;
   }
   
-  .splittext {
+  .splittype {
     margin-bottom: 30px;
   }
   
@@ -19,16 +23,11 @@ body {
   h1 span {
     color: orange;
   }
-
-  .secondline {
-    display: flex;
-    align-items: flex-end;
-  }
   
   .dying {
     color: hotpink;
     font-size: 1.5em;
-    margin-left: 30px;
+    /* margin-left: 30px; */
   }
   
   button {
