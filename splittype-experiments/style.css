@@ -9,6 +9,7 @@ body {
     font-size: 32px;
     text-transform: uppercase;
     padding: 90px;
+    padding-left: 200px;
   }
   
   .splittype {
@@ -23,11 +24,10 @@ body {
   h1 span {
     color: orange;
   }
-  
+
   .dying {
     color: hotpink;
     font-size: 1.5em;
-    /* margin-left: 30px; */
   }
   
   button {
