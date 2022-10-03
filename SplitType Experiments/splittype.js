@@ -26,8 +26,7 @@ tl.from(firstLine.chars, {
 
 .from(dying.chars, {
     opacity: 0,
-    y: -100,
-    duration: 0.5,
+    duration: 1,
     stagger: { amount: 0.75 },
 })
 

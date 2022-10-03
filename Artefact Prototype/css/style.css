@@ -1,0 +1,89 @@
+/* Global */
+html {
+    min-height: 100%;
+    box-sizing: content-box;
+}
+
+body {
+    height: calc(100vh - 14em);
+    color: rgba(255, 255, 255, .75);
+    font-family: "Poppins", sans-serif;
+    background-color: #171717;
+    font-size: 28px;
+    padding:6em;
+}
+
+button {
+    font-size: 16px;
+    text-transform: uppercase;
+    background: transparent;
+    background: #47cf73;
+    color: #333;
+    padding: 16px;
+    font-weight: 600;
+    border: none;
+    font-family: "Poppins", sans-serif;
+}
+
+img {
+    max-width: 25%;
+}
+
+/* Fonts */
+@font-face {
+    font-family: "Fraktion";
+    src: url("../fonts/PPFraktionMono-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Fraktion";
+    src: url("../fonts/PPFraktionMono-RegularItalic.ttf") format("truetype");
+    font-weight: normal;
+    font-style: italic;
+}
+
+/* Typography */
+h1 {
+    font-family: 'Major Mono Display', monospace;
+    text-transform: lowercase;
+    -webkit-text-stroke: 4px white;
+}
+
+h1 span {
+    margin-left: 10px;
+    -webkit-text-stroke: 6px white;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+header {
+    margin-bottom: 100px;
+}
+
+/* Typewriter Effect */
+.typewriter {
+    font-family: "Fraktion", sans-serif;
+    line-height: 2;
+    margin-bottom: 100px;
+}
+
+.cursor {
+    margin: 0;
+    display: inline-block;
+    width: 30px;
+    border-bottom: 4px solid rgba(0,200,20, .75);
+}
+
+/* Comments Typewriter */
+
+.typeComments {
+    color: hotpink;
+    /* font-size: 1.5em;
+    letter-spacing: 0.25em; */
+  }

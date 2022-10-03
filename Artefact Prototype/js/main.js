@@ -1,27 +1,46 @@
+// Intro typewriter
+let typewriter = new gsap.timeline();
 
-
-let tl = new TimelineMax({});
-
-// letter animation
-tl.to(".intro-text", {
+typewriter.to(".intro__firstLine", {
   text: {
-    value: "40% of teenagers experience online bullying everyday.<br />Pick your poison."
+    value: "Roughly 30% of teenagers experience online bullying everyday. <br />This is how it feels."
   },
-  duration: 3,
+  duration: 4,
   delay: 0,
   ease: "none"
 })
 
 // blinking cursor animation
-tl.fromTo("#cursor", 1, {
-  x: -25,
-  "border-right-color": "rgba(255,255,255,0.75)"
+typewriter.fromTo(".cursor", 1, {
+  x: 0,
+  y: -20,
+  "border-bottom-color": "rgba(0,200,20,0.75)"
 }, {
-  "border-right-color": "rgba(255,255,255,0)",
+  "border-bottom-color": "rgba(0,140,15,0)",
   repeat: -1,
-  ease:  SteppedEase.config(37)
+  ease: SteppedEase.config(35)
 }, 0);
 
-document.querySelector('#restart').onclick = () => tl.restart()
-document.querySelector('#pause').onclick = () => tl.pause()
-document.querySelector('#resume').onclick = () => tl.resume()
+
+/* Creating a gsap timeline for SplitType functions */
+const splittype = gsap.timeline({
+  }),
+  mySplitText = new SplitType(".typeComments", {
+    types: 'words, lines, chars'
+  })
+chars = mySplitText.chars;
+
+// Animate characters into view with a stagger effect
+
+splittype.from(chars, {
+  opacity: 0,
+  duration: 0.2,
+  stagger: {
+    amount: 0.75
+  },
+})
+
+document.getElementById("start").onclick = function () {
+  typewriterIntro.restart();
+  splittype.restart();
+}
