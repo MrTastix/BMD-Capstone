@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
   })
     .to(".intro__secondLine", {
       text: {
-        value: "This is what it looks like."
+        value: "This is what it feels like."
       },
       duration: 2,
       delay: 0.75,
@@ -41,114 +41,110 @@ document.addEventListener('DOMContentLoaded', function () {
   // COMMENTS SEQUENCE //
   ///////////////////////
 
-  const comment1__tl = gsap.timeline({ paused: true })
-  const comment2__tl = gsap.timeline({ paused: true })
-  const comment3__tl = gsap.timeline({ paused: true })
-  const comment4__tl = gsap.timeline({ paused: true })
-  const comment5__tl = gsap.timeline({ paused: true })
+  /* Array of all the toxic messages to be sent */
+  const toxicMsgs = [
+    "Man you're so fucking <b>stupid</b>",
+    "Just <b>TOUGHEN UP</b> bro",
+    "Some people need to <b>die and make room</b>",
+    "You're a fucking <b>casual</b>",
+    "Have you tried <b>getting good</b>",
+    "You are a <b>waste of space</b>",
+    "Don't be so offended",
+    "<b>Kill yourself</b>",
+    "Less <b>useless creatures</b> means more oxygen for the rest of us",
+  ];
 
-  comment1 = new SplitType(".comment1", {})
-  comment2 = new SplitType(".comment2", {})
-  comment3 = new SplitType(".comment3", {})
-  comment4 = new SplitType(".comment4", {})
-  comment5 = new SplitType(".comment5", {})
+  /* Container that will hold the messages  */
+  const commentsContainer = document.querySelector(".comments");
 
-  // Words for emphasis
-  emphasis = new SplitType(".emphasis", {})
+  function addMsg() {
+    // Insert custom messages
+    for (let i = 0; i <= 51; i++) {
 
-  // This all needs to be cleaned up to be programmatic instead of using so much bloody code
+      let newBubble = document.createElement("p");
+      newBubble.innerHTML = `${toxicMsgs[Math.floor(Math.random() * toxicMsgs.length)]} `;
 
-  // Comment 1 timeline
-  comment1__tl.from(comment1.chars, {
-    delay: 0.5,
-    opacity: 0,
-    duration: 0.3,
-    stagger: {
-      amount: 0.5
+      commentsContainer.appendChild(newBubble);
+
+      if (i == 50) {
+        displayMsgs(firstMsgSet);
+      }
+
+      console.log(commentsContainer);
     }
-  })
-    .from(emphasis.chars, {
-      delay: 0.5,
-      opacity: 0,
-      duration: 1,
-      stagger: {
-        amount: 0.5
-      },
-      x: Math.random() * 650 - 100,
-      y: Math.random() * 350 - 100,
+  }
+
+  function displayMsgs(groupName) {
+
+    // Select each individual comment
+    let msgBubbles = document.querySelectorAll(`#firstMsgSet p`);
+
+    // Loops through each individual message and adds a timeline to each one, as well as positioning each message randomly within the browser window.
+    msgBubbles.forEach((item, index) => {
+
+      // Calculates the width of each message box
+      bubbleWidth = item.offsetWidth;
+      bubbleHeight = item.offsetHeight;
+
+      // Stores size of the message box minus the browsers size
+      let xMax = window.innerWidth - bubbleWidth;
+      let yMax = window.innerHeight - bubbleHeight;
+
+      // Positions each individual box randomly within the browser window
+      let bubbleX = Math.random() * xMax;
+      let bubbleY = Math.random() * yMax;
+
+      item.style.left = `${bubbleX}px`
+      item.style.top = `${bubbleY}px`
+
+      // Timeline defaults for each instance
+      gsap.timeline({
+        defaults: {
+          delay: 0.5,
+          stagger: {
+            amount: 3
+          }
+        }
+      })
+        // Boxes zoom into view from the bottom left anchor point
+        .from(msgBubbles, {
+          scale: 0,
+          transformOrigin: "0% 0%"
+        })
+        .to(msgBubbles, {
+          scale: 1,
+          transformOrigin: "0% 100%"
+        })
     })
-
-  // comment1__tl.to(comment1.chars, {
-  //   opacity: 0,
-  //   delay: 12,
-  //   stagger: {
-  //     amount: 0.5
-  //   }
-  // });
-
-  // Comment 2 timeline
-  comment2__tl.from(comment2.chars, {
-    delay: 3,
-    opacity: 0,
-    duration: 0.3,
-    stagger: {
-      amount: 0.5
-    }
-  });
-
-  // Comment 3 timeline
-  comment3__tl.from(comment3.chars, {
-    delay: 6,
-    opacity: 0,
-    duration: 0.3,
-    stagger: {
-      amount: 0.5
-    }
-  });
-  // Comment 4 timeline
-  comment4__tl.from(comment4.chars, {
-    delay: 9,
-    opacity: 0,
-    duration: 0.3,
-    stagger: {
-      amount: 0.5
-    }
-  });
+  }
 
   ///////////////////
   // START BUTTON //
   //////////////////
 
   /*
-
+ 
     This section deals with the "Get Started" button that, when pressed, hides the intro sequence and starts the comment one, alongside a "Restart" button resetting both sequences.
-
+ 
   */
 
   const introSection = document.querySelector(".typewriter");
-  const commentSection = document.querySelector(".comments");
+  const msgSection = document.querySelector(".comments");
   const button = document.querySelector("button");
 
   button.addEventListener("click", () => {
     if (!button.classList.contains("opened")) {
-      comment1__tl.play(0); // plays comment timelines from the beginning
-      comment2__tl.play(0);
-      comment3__tl.play(0);
-      comment4__tl.play(0);
       button.classList.toggle("opened");
+      addMsg();
       introSection.classList.add("hidden"); // hides the intro sequence
-      commentSection.classList.remove("hidden"); // unhides comment sequence
+      msgSection.classList.remove("hidden"); // unhides comment sequence
       button.innerHTML = "Restart"; // changes button text
-
     } else {
-      comment1__tl.pause(); // pauses comment sequence
-      comment2__tl.pause();
-      comment3__tl.pause();
-      comment4__tl.pause();
-      introSequence.play(0); // plays intro sequence from the beginning
+
+      introSequence.play(0); // pauses intro sequence
       button.classList.toggle("opened");
       introSection.classList.remove("hidden"); // unhides the intro sequence
-      commentSection.classList.add("hidden"); // hides comment sequence
+      msgSection.classList.add("hidden"); // hides comment sequence
       button.innerHTML = "Get Started"; // reverts button text
     }
   });

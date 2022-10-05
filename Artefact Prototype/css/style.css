@@ -1,3 +1,12 @@
+/* Variables */
+
+:root {
+    --green: #008f11;
+    --light-green: #47cf73;
+    --white: #fffff0;
+    --black: #171717;
+  }
+
 /* Fonts */
 @font-face {
     font-family: "Fraktion";
@@ -21,27 +30,26 @@ html {
 
 body {
     height: calc(100vh - 14em);
-    color: rgba(255, 255, 255, .75);
-    background-color: #171717;
+    color: var(--white);
+    background-color: var(--black);
     font-size: 28px;
-    padding: 6em;
+    padding: 3em 4em;
+    font-family: "Poppins", sans-serif;
 }
 
 button {
     font-size: 16px;
     text-transform: uppercase;
     background: transparent;
-    background: #47cf73;
+    background: var(--light-green);
     color: #333;
     padding: 16px;
-    margin-top: 100px;
+    margin: 3em 0;
     font-weight: 600;
     border: none;
     font-family: 'Fraktion', monospace;
-}
-
-img {
-    max-width: 25%;
+    position: fixed;
+    bottom: 0;
 }
 
 .hidden {
@@ -69,6 +77,10 @@ header {
     margin-bottom: 100px;
 }
 
+img {
+    max-width: 200px;
+}
+
 /* Typewriter Effect */
 .typewriter {
     font-family: "Fraktion", sans-serif;
@@ -82,16 +94,35 @@ header {
     border-bottom: 4px solid rgba(0, 200, 20, .75);
 }
 
-/* Comments Typewriter */
+/* Speech Bubbles */
 
 .comments p {
-    font-family: "Oswald", sans-serif;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 2em;
+    position: fixed;
+    background-color: var(--green);
+    margin: 32px;
+    padding: 28px;
+    border-radius: 28px;
+    display: inline-block;
+    max-width: 500px;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
-.emphasis {
-    color: orange;
-    font-size: 2em;
+.comments p:before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-left: 24px solid var(--green);
+    border-right: 12px solid transparent;
+    border-top: 12px solid var(--green);
+    border-bottom: 20px solid transparent;
+    left: 32px;
+    bottom: -24px;
+  }
+
+.comments b {
+    font-size: 1.25em;
+    font-weight: 800;
+    text-transform: uppercase;
 }
