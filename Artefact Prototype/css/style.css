@@ -94,4 +94,5 @@ header {
 .emphasis {
     color: orange;
     font-size: 2em;
+    font-kerning: none;
 }

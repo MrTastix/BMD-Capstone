@@ -41,79 +41,41 @@ document.addEventListener('DOMContentLoaded', function () {
   // COMMENTS SEQUENCE //
   ///////////////////////
 
-  const comment1__tl = gsap.timeline({ paused: true })
-  const comment2__tl = gsap.timeline({ paused: true })
-  const comment3__tl = gsap.timeline({ paused: true })
-  const comment4__tl = gsap.timeline({ paused: true })
-  const comment5__tl = gsap.timeline({ paused: true })
+  /* Text fade in */
+  let commentsSequence = document.querySelectorAll(".comments p");
+  commentsSequence.forEach((item, index) => {
+    let commentAnim = new SplitType(item, {
+      types: "chars",
+      // lineClass: "split-child"
+    });
+    let commentLine = new SplitType(item, {
+      lineClass: "paragraph-line"
+    });
+    let commentLines = gsap.utils.toArray(commentLine.lines);
 
-  comment1 = new SplitType(".comment1", {})
-  comment2 = new SplitType(".comment2", {})
-  comment3 = new SplitType(".comment3", {})
-  comment4 = new SplitType(".comment4", {})
-  comment5 = new SplitType(".comment5", {})
+    gsap.timeline({
+      defaults: {
+        // paused: true,
+        delay: 0.5,
+        duration: 0.3,
+        stagger: {
+          amount: 0.5
+        }
+      },
+    })
+      .from(commentLines, {
+        duration: 1.5,
+        opacity: 0,
+        ease: "ease-out",
+        stagger: 0.15,
+        onComplete: revertText
+      })
 
-  // Words for emphasis
-  emphasis = new SplitType(".emphasis", {})
-
-  // This all needs to be cleaned up to be programmatic instead of using so much bloody code
-
-  // Comment 1 timeline
-  comment1__tl.from(comment1.chars, {
-    delay: 0.5,
-    opacity: 0,
-    duration: 0.3,
-    stagger: {
-      amount: 0.5
+    function revertText() {
+      // console.log(item);
+      SplitType.revert(item)
     }
   })
-    .from(emphasis.chars, {
-      delay: 0.5,
-      opacity: 0,
-      duration: 1,
-      stagger: {
-        amount: 0.5
-      },
-      x: Math.random() * 650 - 100,
-      y: Math.random() * 350 - 100,
-    })
-
-  // comment1__tl.to(comment1.chars, {
-  //   opacity: 0,
-  //   delay: 12,
-  //   stagger: {
-  //     amount: 0.5
-  //   }
-  // });
-
-  // Comment 2 timeline
-  comment2__tl.from(comment2.chars, {
-    delay: 3,
-    opacity: 0,
-    duration: 0.3,
-    stagger: {
-      amount: 0.5
-    }
-  });
-
-  // Comment 3 timeline
-  comment3__tl.from(comment3.chars, {
-    delay: 6,
-    opacity: 0,
-    duration: 0.3,
-    stagger: {
-      amount: 0.5
-    }
-  });
-  // Comment 4 timeline
-  comment4__tl.from(comment4.chars, {
-    delay: 9,
-    opacity: 0,
-    duration: 0.3,
-    stagger: {
-      amount: 0.5
-    }
-  });
 
   ///////////////////
   // START BUTTON //
@@ -131,20 +93,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
   button.addEventListener("click", () => {
     if (!button.classList.contains("opened")) {
-      comment1__tl.play(0); // plays comment timelines from the beginning
-      comment2__tl.play(0);
-      comment3__tl.play(0);
-      comment4__tl.play(0);
+      // item.play(0); // plays comment timelines from the beginning
       button.classList.toggle("opened");
       introSection.classList.add("hidden"); // hides the intro sequence
       commentSection.classList.remove("hidden"); // unhides comment sequence
       button.innerHTML = "Restart"; // changes button text
 
     } else {
-      comment1__tl.pause(); // pauses comment sequence
-      comment2__tl.pause();
-      comment3__tl.pause();
-      comment4__tl.pause();
+      // commentsSequence.pause(); // pauses comment sequence
       introSequence.play(0); // plays intro sequence from the beginning
       button.classList.toggle("opened");
       introSection.classList.remove("hidden"); // unhides the intro sequence
