@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
   })
     .to(".intro__secondLine", {
       text: {
-        value: "This is what it looks like."
+        value: "This is what it feels like."
       },
       duration: 2,
       delay: 0.75,
@@ -41,70 +41,110 @@ document.addEventListener('DOMContentLoaded', function () {
   // COMMENTS SEQUENCE //
   ///////////////////////
 
-  /* Text fade in */
-  let commentsSequence = document.querySelectorAll(".comments p");
-  commentsSequence.forEach((item, index) => {
-    let commentAnim = new SplitType(item, {
-      types: "chars",
-      // lineClass: "split-child"
-    });
-    let commentLine = new SplitType(item, {
-      lineClass: "paragraph-line"
-    });
-    let commentLines = gsap.utils.toArray(commentLine.lines);
+  /* Array of all the toxic messages to be sent */
+  const toxicMsgs = [
+    "Man you're so fucking <b>stupid</b>",
+    "Just <b>TOUGHEN UP</b> bro",
+    "Some people need to <b>die and make room</b>",
+    "You're a fucking <b>casual</b>",
+    "Have you tried <b>getting good</b>",
+    "You are a <b>waste of space</b>",
+    "Don't be so offended",
+    "<b>Kill yourself</b>",
+    "Less <b>useless creatures</b> means more oxygen for the rest of us",
+  ];
 
-    gsap.timeline({
-      defaults: {
-        // paused: true,
-        delay: 0.5,
-        duration: 0.3,
-        stagger: {
-          amount: 0.5
-        }
-      },
-    })
-      .from(commentLines, {
-        duration: 1.5,
-        opacity: 0,
-        ease: "ease-out",
-        stagger: 0.15,
-        onComplete: revertText
-      })
+  /* Container that will hold the messages  */
+  const commentsContainer = document.querySelector(".comments");
 
-    function revertText() {
-      // console.log(item);
-      SplitType.revert(item)
+  function addMsg() {
+    // Insert custom messages
+    for (let i = 0; i <= 51; i++) {
+
+      let newBubble = document.createElement("p");
+      newBubble.innerHTML = `${toxicMsgs[Math.floor(Math.random() * toxicMsgs.length)]} `;
+
+      commentsContainer.appendChild(newBubble);
+
+      if (i == 50) {
+        displayMsgs(firstMsgSet);
+      }
+
+      console.log(commentsContainer);
     }
-  })
+  }
+
+  function displayMsgs(groupName) {
+
+    // Select each individual comment
+    let msgBubbles = document.querySelectorAll(`#firstMsgSet p`);
+
+    // Loops through each individual message and adds a timeline to each one, as well as positioning each message randomly within the browser window.
+    msgBubbles.forEach((item, index) => {
+
+      // Calculates the width of each message box
+      bubbleWidth = item.offsetWidth;
+      bubbleHeight = item.offsetHeight;
+
+      // Stores size of the message box minus the browsers size
+      let xMax = window.innerWidth - bubbleWidth;
+      let yMax = window.innerHeight - bubbleHeight;
+
+      // Positions each individual box randomly within the browser window
+      let bubbleX = Math.random() * xMax;
+      let bubbleY = Math.random() * yMax;
+
+      item.style.left = `${bubbleX}px`
+      item.style.top = `${bubbleY}px`
+
+      // Timeline defaults for each instance
+      gsap.timeline({
+        defaults: {
+          delay: 0.5,
+          stagger: {
+            amount: 3
+          }
+        }
+      })
+        // Boxes zoom into view from the bottom left anchor point
+        .from(msgBubbles, {
+          scale: 0,
+          transformOrigin: "0% 0%"
+        })
+        .to(msgBubbles, {
+          scale: 1,
+          transformOrigin: "0% 100%"
+        })
+    })
+  }
 
   ///////////////////
   // START BUTTON //
   //////////////////
 
   /*
-
+ 
     This section deals with the "Get Started" button that, when pressed, hides the intro sequence and starts the comment one, alongside a "Restart" button resetting both sequences.
-
+ 
   */
 
   const introSection = document.querySelector(".typewriter");
-  const commentSection = document.querySelector(".comments");
+  const msgSection = document.querySelector(".comments");
   const button = document.querySelector("button");
 
   button.addEventListener("click", () => {
     if (!button.classList.contains("opened")) {
-      // item.play(0); // plays comment timelines from the beginning
       button.classList.toggle("opened");
+      addMsg();
       introSection.classList.add("hidden"); // hides the intro sequence
-      commentSection.classList.remove("hidden"); // unhides comment sequence
+      msgSection.classList.remove("hidden"); // unhides comment sequence
       button.innerHTML = "Restart"; // changes button text
-
     } else {
-      // commentsSequence.pause(); // pauses comment sequence
-      introSequence.play(0); // plays intro sequence from the beginning
+
+      introSequence.play(0); // pauses intro sequence
       button.classList.toggle("opened");
       introSection.classList.remove("hidden"); // unhides the intro sequence
-      commentSection.classList.add("hidden"); // hides comment sequence
+      msgSection.classList.add("hidden"); // hides comment sequence
       button.innerHTML = "Get Started"; // reverts button text
     }
   });
