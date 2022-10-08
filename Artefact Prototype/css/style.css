@@ -33,7 +33,7 @@ body {
     color: var(--white);
     background-color: var(--black);
     font-size: 28px;
-    padding: 3em 4em;
+    /* padding: 3em 4em; */
     font-family: "Poppins", sans-serif;
 }
 
@@ -50,6 +50,7 @@ button {
     font-family: 'Fraktion', monospace;
     position: fixed;
     bottom: 0;
+    z-index: 999;
 }
 
 .hidden {
@@ -70,6 +71,10 @@ h1 span {
 p {
     margin: 0 0 0.5em;
     padding: 0;
+}
+
+.wrapper {
+    padding: 4em;
 }
 
 /* Header */
@@ -99,7 +104,6 @@ img {
 .comments p {
     position: fixed;
     background-color: var(--green);
-    margin: 32px;
     padding: 28px;
     border-radius: 28px;
     display: inline-block;

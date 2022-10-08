@@ -69,8 +69,6 @@ document.addEventListener('DOMContentLoaded', function () {
       if (i == 50) {
         displayMsgs(firstMsgSet);
       }
-
-      console.log(commentsContainer);
     }
   }
 
@@ -80,27 +78,26 @@ document.addEventListener('DOMContentLoaded', function () {
     let msgBubbles = document.querySelectorAll(`#firstMsgSet p`);
 
     // Loops through each individual message and adds a timeline to each one, as well as positioning each message randomly within the browser window.
-    msgBubbles.forEach((item, index) => {
+    msgBubbles.forEach((speechBubble, index) => {
 
       // Calculates the width of each message box
-      bubbleWidth = item.offsetWidth;
-      bubbleHeight = item.offsetHeight;
+      bubbleWidth = speechBubble.offsetWidth;
+      bubbleHeight = speechBubble.offsetHeight;
 
       // Stores size of the message box minus the browsers size
       let xMax = window.innerWidth - bubbleWidth;
       let yMax = window.innerHeight - bubbleHeight;
 
       // Positions each individual box randomly within the browser window
-      let bubbleX = Math.random() * xMax;
-      let bubbleY = Math.random() * yMax;
+      let bubbleX = Math.random() * xMax * 0.9;
+      let bubbleY = Math.random() * yMax * 0.9;
 
-      item.style.left = `${bubbleX}px`
-      item.style.top = `${bubbleY}px`
+      speechBubble.style.left = `${bubbleX}px`
+      speechBubble.style.top = `${bubbleY}px`
 
       // Timeline defaults for each instance
       gsap.timeline({
         defaults: {
-          delay: 0.5,
           stagger: {
             amount: 3
           }
@@ -135,12 +132,11 @@ document.addEventListener('DOMContentLoaded', function () {
   button.addEventListener("click", () => {
     if (!button.classList.contains("opened")) {
       button.classList.toggle("opened");
-      addMsg();
       introSection.classList.add("hidden"); // hides the intro sequence
       msgSection.classList.remove("hidden"); // unhides comment sequence
       button.innerHTML = "Restart"; // changes button text
+      addMsg();
     } else {
-
       introSequence.play(0); // pauses intro sequence
       button.classList.toggle("opened");
       introSection.classList.remove("hidden"); // unhides the intro sequence
