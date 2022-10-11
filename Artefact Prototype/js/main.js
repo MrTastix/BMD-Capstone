@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
   /* Array of all the toxic messages to be sent */
   const toxicMsgs = [
     "Man you're so fucking <b>stupid</b>",
-    "Just <b>TOUGHEN UP</b> bro",
+    "Just <b>toughen up</b> bro",
     "Some people need to <b>die and make room</b>",
     "You're a fucking <b>casual</b>",
     "Have you tried <b>getting good</b>",
@@ -58,13 +58,13 @@ document.addEventListener('DOMContentLoaded', function () {
   const commentsContainer = document.querySelector(".comments");
 
   function addMsg() {
-    maxBubbles = 50;
+    maxBubbles = 30;
 
     // Insert custom messages
     for (let i = 0; i <= maxBubbles; i++) {
 
-      let newBubble = document.createElement("p");
-      newBubble.id = "bubble";
+      let newBubble = document.createElement("div");
+      newBubble.className = "bubble";
       newBubble.innerHTML = `${toxicMsgs[Math.floor(Math.random() * toxicMsgs.length)]} `;
 
       commentsContainer.appendChild(newBubble);
@@ -72,13 +72,15 @@ document.addEventListener('DOMContentLoaded', function () {
       if (i == maxBubbles) {
         displayMsgs();
       }
+
+      Draggable.create('.bubble', {});
     }
   }
 
   function displayMsgs() {
 
     // Select each individual comment
-    const msgBubbles = document.querySelectorAll(".comments p");
+    const msgBubbles = document.querySelectorAll(".bubble");
 
     let bubbleTimeline = new gsap.timeline({
       defaults: {
@@ -86,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
         scale: 0,
         transformOrigin: "0 0",
         stagger: {
-          amount: 3
+          amount: 15
         }
       }
     })
@@ -158,7 +160,5 @@ document.addEventListener('DOMContentLoaded', function () {
   ///////////////////////
   // DRAGGABLE BUBBLES //
   ///////////////////////
-
-  Draggable.create('.bubble');
 
 })

@@ -106,7 +106,7 @@ img {
 }
 
 /* Speech Bubbles */
-.comments p {
+.bubble {
     position: fixed;
     background-color: var(--green);
     max-width: 500px;
@@ -115,9 +115,11 @@ img {
     display: inline-block;
     font-weight: bold;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    user-select: none;
 }
 
-.comments p:before {
+.bubble:before {
     content: "";
     width: 0px;
     height: 0px;
@@ -130,7 +132,7 @@ img {
     bottom: -24px;
 }
 
-.comments b {
+.bubble b {
     font-size: 1.25em;
     font-weight: 800;
     text-transform: uppercase;
