@@ -58,24 +58,45 @@ document.addEventListener('DOMContentLoaded', function () {
   const commentsContainer = document.querySelector(".comments");
 
   function addMsg() {
+    maxBubbles = 50;
+
     // Insert custom messages
-    for (let i = 0; i <= 51; i++) {
+    for (let i = 0; i <= maxBubbles; i++) {
 
       let newBubble = document.createElement("p");
+      newBubble.id = "bubble";
       newBubble.innerHTML = `${toxicMsgs[Math.floor(Math.random() * toxicMsgs.length)]} `;
 
       commentsContainer.appendChild(newBubble);
 
-      if (i == 50) {
-        displayMsgs(firstMsgSet);
+      if (i == maxBubbles) {
+        displayMsgs();
       }
     }
   }
 
-  function displayMsgs(groupName) {
+  function displayMsgs() {
 
     // Select each individual comment
-    let msgBubbles = document.querySelectorAll(`#firstMsgSet p`);
+    const msgBubbles = document.querySelectorAll(".comments p");
+
+    let bubbleTimeline = new gsap.timeline({
+      defaults: {
+        delay: 0.5,
+        scale: 0,
+        transformOrigin: "0 0",
+        stagger: {
+          amount: 3
+        }
+      }
+    })
+
+    // Speech bubbles zoom into view from the bottom left anchor point
+    bubbleTimeline.from(msgBubbles, {})
+      .to(msgBubbles, {
+        scale: 1,
+        transformOrigin: "0% 100%"
+      })
 
     // Loops through each individual message and adds a timeline to each one, as well as positioning each message randomly within the browser window.
     msgBubbles.forEach((speechBubble, index) => {
@@ -89,29 +110,11 @@ document.addEventListener('DOMContentLoaded', function () {
       let yMax = window.innerHeight - bubbleHeight;
 
       // Positions each individual box randomly within the browser window
-      let bubbleX = Math.random() * xMax * 0.9;
-      let bubbleY = Math.random() * yMax * 0.9;
+      let bubbleX = Math.random() * xMax * 1;
+      let bubbleY = Math.random() * yMax * 1;
 
       speechBubble.style.left = `${bubbleX}px`
       speechBubble.style.top = `${bubbleY}px`
-
-      // Timeline defaults for each instance
-      gsap.timeline({
-        defaults: {
-          stagger: {
-            amount: 3
-          }
-        }
-      })
-        // Boxes zoom into view from the bottom left anchor point
-        .from(msgBubbles, {
-          scale: 0,
-          transformOrigin: "0% 0%"
-        })
-        .to(msgBubbles, {
-          scale: 1,
-          transformOrigin: "0% 100%"
-        })
     })
   }
 
@@ -119,31 +122,43 @@ document.addEventListener('DOMContentLoaded', function () {
   // START BUTTON //
   //////////////////
 
-  /*
- 
-    This section deals with the "Get Started" button that, when pressed, hides the intro sequence and starts the comment one, alongside a "Restart" button resetting both sequences.
- 
-  */
-
-  const introSection = document.querySelector(".typewriter");
+  const introSection = document.querySelector("#intro");
+  const warningSection = document.querySelector("#warning");
+  const infoSection = document.querySelector("#info");
   const msgSection = document.querySelector(".comments");
   const button = document.querySelector("button");
 
   button.addEventListener("click", () => {
-    if (!button.classList.contains("opened")) {
-      button.classList.toggle("opened");
-      introSection.classList.add("hidden"); // hides the intro sequence
-      msgSection.classList.remove("hidden"); // unhides comment sequence
-      button.innerHTML = "Restart"; // changes button text
-      addMsg();
-    } else {
-      introSequence.play(0); // pauses intro sequence
-      button.classList.toggle("opened");
-      introSection.classList.remove("hidden"); // unhides the intro sequence
-      msgSection.classList.add("hidden"); // hides comment sequence
-      button.innerHTML = "Get Started"; // reverts button text
+    switch (button.innerHTML) {
+      case "Get Started":
+        button.innerHTML = "Proceed";
+        // Hide intro; show warning
+        introSection.classList.toggle("hidden");
+        warningSection.classList.toggle("hidden");
+        break;
+      case "Proceed":
+        button.innerHTML = "Restart";
+        // Hide warning, show comments
+        warningSection.classList.toggle("hidden");
+        msgSection.classList.toggle("hidden");
+        infoSection.classList.toggle("hidden");
+        addMsg();
+        break;
+      case "Restart":
+        button.innerHTML = "Get Started";
+        // Hide comments, show intro
+        introSection.classList.toggle("hidden");
+        msgSection.classList.toggle("hidden");
+        infoSection.classList.toggle("hidden");
+        // Restart intro timeline
+        introSequence.play(0);
     }
   });
 
+  ///////////////////////
+  // DRAGGABLE BUBBLES //
+  ///////////////////////
+
+  Draggable.create('.bubble');
 
 })
