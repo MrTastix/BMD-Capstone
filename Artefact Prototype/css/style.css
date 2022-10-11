@@ -5,7 +5,7 @@
     --light-green: #47cf73;
     --white: #fffff0;
     --black: #171717;
-  }
+}
 
 /* Fonts */
 @font-face {
@@ -44,7 +44,7 @@ button {
     background: var(--light-green);
     color: #333;
     padding: 16px;
-    margin: 3em 0;
+    margin: 6em 0;
     font-weight: 600;
     border: none;
     font-family: 'Fraktion', monospace;
@@ -55,6 +55,10 @@ button {
 
 .hidden {
     display: none;
+}
+
+.wrapper {
+    padding: 4em;
 }
 
 /* Typography */
@@ -71,10 +75,6 @@ h1 span {
 p {
     margin: 0 0 0.5em;
     padding: 0;
-}
-
-.wrapper {
-    padding: 4em;
 }
 
 /* Header */
@@ -99,17 +99,22 @@ img {
     border-bottom: 4px solid rgba(0, 200, 20, .75);
 }
 
-/* Speech Bubbles */
+/* Warning Text */
+.warning {
+    position: fixed;
+    z-index: 999;
+}
 
+/* Speech Bubbles */
 .comments p {
     position: fixed;
     background-color: var(--green);
+    max-width: 500px;
     padding: 28px;
     border-radius: 28px;
     display: inline-block;
-    max-width: 500px;
     font-weight: bold;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .comments p:before {
@@ -123,10 +128,17 @@ img {
     border-bottom: 20px solid transparent;
     left: 32px;
     bottom: -24px;
-  }
+}
 
 .comments b {
     font-size: 1.25em;
     font-weight: 800;
     text-transform: uppercase;
+}
+
+/* Info Section */
+#info div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
 }
