@@ -19,13 +19,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Website intro text
   introSequence.to(".intro__firstLine", {
-    text: {
-      value: "30% of New Zealand teens experience online bullying everyday.<br />"
-    },
-    duration: 3,
-    delay: 0,
-    ease: "none"
-  })
+      text: {
+        value: "30% of New Zealand teens experience online bullying everyday.<br />"
+      },
+      duration: 3,
+      delay: 0,
+      ease: "none"
+    })
     .to(".intro__secondLine", {
       text: {
         value: "This is what it feels like."
@@ -128,37 +128,40 @@ document.addEventListener('DOMContentLoaded', function () {
   const warningSection = document.querySelector("#warning");
   const infoSection = document.querySelector("#info");
   const msgSection = document.querySelector(".comments");
-  const button = document.querySelector("button");
+  const startBtn = document.querySelector(".start");
+  const clrBtn = document.querySelector(".clear");
 
-  button.addEventListener("click", () => {
-    switch (button.innerHTML) {
+  startBtn.addEventListener("click", () => {
+    switch (startBtn.innerHTML) {
       case "Get Started":
-        button.innerHTML = "Proceed";
+        startBtn.innerHTML = "Proceed";
         // Hide intro; show warning
         introSection.classList.toggle("hidden");
         warningSection.classList.toggle("hidden");
         break;
       case "Proceed":
-        button.innerHTML = "Restart";
+        startBtn.innerHTML = "Restart";
         // Hide warning, show comments
         warningSection.classList.toggle("hidden");
-        msgSection.classList.toggle("hidden");
+        msgSection.classList.remove("hidden");
         infoSection.classList.toggle("hidden");
+        clrBtn.classList.toggle("hidden");
         addMsg();
         break;
       case "Restart":
-        button.innerHTML = "Get Started";
+        startBtn.innerHTML = "Get Started";
         // Hide comments, show intro
         introSection.classList.toggle("hidden");
-        msgSection.classList.toggle("hidden");
+        msgSection.classList.add("hidden");
         infoSection.classList.toggle("hidden");
+        clrBtn.classList.toggle("hidden");
         // Restart intro timeline
         introSequence.play(0);
     }
   });
 
-  ///////////////////////
-  // DRAGGABLE BUBBLES //
-  ///////////////////////
+  clrBtn.addEventListener("click", () => {
+      msgSection.classList.add("hidden");
+    });
 
 })
