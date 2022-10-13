@@ -1,8 +1,8 @@
 /* Variables */
 
 :root {
-    --green: #008f11;
-    --light-green: #47cf73;
+    --main-color: #218ce6;
+    --alt-color: #90c6f3;
     --white: #fffff0;
     --black: #171717;
 }
@@ -32,13 +32,24 @@ body {
     height: calc(100vh - 14em);
     color: var(--white);
     background-color: var(--black);
-    font-size: 28px;
+    font-size: 20px;
     /* padding: 3em 4em; */
     font-family: "Poppins", sans-serif;
+    line-height: 1.5;
 }
 
+.wrapper {
+    padding: 6em;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Button Styling */
+
 button {
-    background: var(--light-green);
+    background: var(--alt-color);
     font-size: 16px;
     text-transform: uppercase;
     color: #333;
@@ -55,28 +66,20 @@ button {
     position: fixed;
 }
 
-.hidden {
-    display: none;
-}
-
-.wrapper {
-    padding: 4em;
-}
-
 /* Typography */
-h1 {
-    text-transform: lowercase;
-    -webkit-text-stroke: 4px white;
+h1, h2, h3 {
+    margin: 0;
+    padding: 0;
 }
 
-h1 span {
-    margin-left: 10px;
-    -webkit-text-stroke: 6px white;
-}
-
-p {
+p, ul {
     margin: 0 0 1em;
     padding: 0;
+    list-style: none;
+}
+
+li {
+    font-weight: bold;
 }
 
 /* Header */
@@ -92,13 +95,14 @@ img {
 .typewriter {
     font-family: "Fraktion", sans-serif;
     line-height: 2;
+    font-size: 1.25em;
 }
 
 .cursor {
     margin: 0;
     display: inline-block;
     width: 30px;
-    border-bottom: 4px solid rgba(0, 200, 20, .75);
+    border-bottom: 4px solid rgba(144,198,243,0.75);
 }
 
 /* Warning Text */
@@ -110,7 +114,7 @@ img {
 /* Speech Bubbles */
 .bubble {
     position: fixed;
-    background-color: var(--green);
+    background-color: var(--main-color);
     max-width: 500px;
     padding: 28px;
     border-radius: 28px;
@@ -126,9 +130,9 @@ img {
     width: 0px;
     height: 0px;
     position: absolute;
-    border-left: 24px solid var(--green);
+    border-left: 24px solid var(--main-color);
     border-right: 12px solid transparent;
-    border-top: 12px solid var(--green);
+    border-top: 12px solid var(--main-color);
     border-bottom: 20px solid transparent;
     left: 32px;
     bottom: -24px;
@@ -142,7 +146,6 @@ img {
 
 /* Info Section */
 #info div {
-    display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 32px;
 }
+
