@@ -10,9 +10,9 @@ document.addEventListener('DOMContentLoaded', function () {
   introSequence.fromTo(".cursor", 1, {
     x: 0,
     y: -20,
-    "border-bottom-color": "rgba(0,200,20,0.75)"
+    "border-bottom-color": "rgba(144,198,243,0.75)"
   }, {
-    "border-bottom-color": "rgba(0,140,15,0)",
+    "border-bottom-color": "rgba(33,140,230,0)",
     repeat: -1,
     ease: SteppedEase.config(35)
   }, 0);
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const commentsContainer = document.querySelector(".comments");
 
   function addMsg() {
-    maxBubbles = 30;
+    maxBubbles = 50;
 
     // Insert custom messages
     for (let i = 0; i <= maxBubbles; i++) {
@@ -74,6 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       Draggable.create('.bubble', {});
+      Draggable.zIndex = 900;
     }
   }
 
@@ -88,7 +89,8 @@ document.addEventListener('DOMContentLoaded', function () {
         scale: 0,
         transformOrigin: "0 0",
         stagger: {
-          amount: 15
+          amount: 8,
+          ease: "power2.in",
         }
       }
     })
