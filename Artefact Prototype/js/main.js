@@ -1,5 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
 
+  /////////////////////
+  // CORE VARIABLES //
+  ////////////////////
+
+  const introSection = document.querySelector("#intro");
+  const warningSection = document.querySelector("#warning");
+  const infoSection = document.querySelector("#info");
+  const commentsSection = document.querySelector("#comments");
+
   ////////////////////
   // INTRO SEQUENCE //
   ////////////////////
@@ -35,7 +44,31 @@ document.addEventListener('DOMContentLoaded', function () {
       ease: "none"
     })
 
-  /* -------------------- */
+  ////////////////////////////
+  // SECTION TRANSISITIONS //
+  ///////////////////////////
+
+  // Warning section transistion
+  const warningSequence = new gsap.timeline();
+  const infoSequence = new gsap.timeline();
+
+  warningSequence.fromTo("#warning", {
+    opacity: 0,
+  }, {
+    opacity: 1,
+    duration: 3,
+    delay: 0.5,
+    ease: "power2.in"
+  });
+
+  infoSequence.fromTo("#info", {
+    opacity: 0,
+  }, {
+    opacity: 1,
+    duration: 5,
+    delay: 3,
+    ease: "power2.in"
+  });
 
   ///////////////////////
   // COMMENTS SEQUENCE //
@@ -54,35 +87,36 @@ document.addEventListener('DOMContentLoaded', function () {
     "Less <b>useless creatures</b> means more oxygen for the rest of us",
   ];
 
-  /* Container that will hold the messages  */
-  const commentsContainer = document.querySelector(".comments");
-
+  /* Creates # of speech bubbles and assigns them a random entry from the above array */
   function addMsg() {
-    maxBubbles = 50;
+    maxBubbles = 35;
 
     // Insert custom messages
     for (let i = 0; i <= maxBubbles; i++) {
 
-      let newBubble = document.createElement("div");
+      // Create new p element with a class of "bubble" that selects a random message from the toxicMsgs array and puts it in the p
+      let newBubble = document.createElement("p");
       newBubble.className = "bubble";
       newBubble.innerHTML = `${toxicMsgs[Math.floor(Math.random() * toxicMsgs.length)]} `;
 
-      commentsContainer.appendChild(newBubble);
+      commentsSection.appendChild(newBubble);
 
       if (i == maxBubbles) {
         displayMsgs();
       }
 
+      // Makes the bubbles draggable within any area of the window
       Draggable.create('.bubble', {});
       Draggable.zIndex = 900;
     }
   }
 
+  /* Function that calculates the position of each bubble and the browser window, then absolute positions the bubbles randomly across the screen */
   function displayMsgs() {
 
-    // Select each individual comment
     const msgBubbles = document.querySelectorAll(".bubble");
 
+    // Timeline to stagger the entry of each bubble
     let bubbleTimeline = new gsap.timeline({
       defaults: {
         delay: 0.5,
@@ -95,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     })
 
-    // Speech bubbles zoom into view from the bottom left anchor point
+    // Speech bubbles scale into view from the bottom left anchor point
     bubbleTimeline.from(msgBubbles, {})
       .to(msgBubbles, {
         scale: 1,
@@ -122,14 +156,10 @@ document.addEventListener('DOMContentLoaded', function () {
     })
   }
 
-  ///////////////////
-  // START BUTTON //
-  //////////////////
+  //////////////////////////
+  // START BUTTON + MISC //
+  /////////////////////////
 
-  const introSection = document.querySelector("#intro");
-  const warningSection = document.querySelector("#warning");
-  const infoSection = document.querySelector("#info");
-  const msgSection = document.querySelector(".comments");
   const startBtn = document.querySelector(".start");
   const clrBtn = document.querySelector(".clear");
 
@@ -145,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function () {
         startBtn.innerHTML = "Restart";
         // Hide warning, show comments
         warningSection.classList.toggle("hidden");
-        msgSection.classList.remove("hidden");
+        commentsSection.classList.remove("hidden");
         infoSection.classList.toggle("hidden");
         clrBtn.classList.toggle("hidden");
         addMsg();
@@ -154,16 +184,22 @@ document.addEventListener('DOMContentLoaded', function () {
         startBtn.innerHTML = "Get Started";
         // Hide comments, show intro
         introSection.classList.toggle("hidden");
-        msgSection.classList.add("hidden");
+        commentsSection.classList.add("hidden");
         infoSection.classList.toggle("hidden");
         clrBtn.classList.toggle("hidden");
-        // Restart intro timeline
+        // Restarts timelines
         introSequence.play(0);
+        warningSequence.play(0);
+        infoSequence.play(0);
     }
   });
 
   clrBtn.addEventListener("click", () => {
-      msgSection.classList.add("hidden");
-    });
+    commentsSection.classList.add("hidden");
+  });
+
+  // Draggable example button
+  Draggable.create('.exampleBubble', {});
+  Draggable.zIndex = 900;
 
 })
