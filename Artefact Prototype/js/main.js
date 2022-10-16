@@ -4,16 +4,16 @@ document.addEventListener('DOMContentLoaded', function () {
   // CORE VARIABLES //
   ////////////////////
 
-  const introSection = document.querySelector("#intro");
-  const warningSection = document.querySelector("#warning");
-  const infoSection = document.querySelector("#info");
-  const commentsSection = document.querySelector("#comments");
+  let introSection = document.querySelector("#intro");
+  let warningSection = document.querySelector("#warning");
+  let infoSection = document.querySelector("#info");
+  let commentsSection = document.querySelector("#comments");
 
   ////////////////////
   // INTRO SEQUENCE //
   ////////////////////
 
-  const introSequence = new gsap.timeline();
+  let introSequence = new gsap.timeline();
 
   // Blinking cursor animation
   introSequence.fromTo(".cursor", 1, {
@@ -53,19 +53,21 @@ document.addEventListener('DOMContentLoaded', function () {
   const infoSequence = new gsap.timeline();
 
   warningSequence.fromTo("#warning", {
+    paused: true,
     opacity: 0,
   }, {
     opacity: 1,
-    duration: 3,
+    duration: 2,
     delay: 0.5,
     ease: "power2.in"
   });
 
   infoSequence.fromTo("#info", {
+    paused: true,
     opacity: 0,
   }, {
     opacity: 1,
-    duration: 5,
+    duration: 3,
     delay: 3,
     ease: "power2.in"
   });
@@ -74,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // COMMENTS SEQUENCE //
   ///////////////////////
 
-  /* Array of all the toxic messages to be sent */
+  // Array of all the toxic messages to be sent
   const toxicMsgs = [
     "Man you're so fucking <b>stupid</b>",
     "Just <b>toughen up</b> bro",
@@ -85,56 +87,48 @@ document.addEventListener('DOMContentLoaded', function () {
     "Don't be so offended",
     "<b>Kill yourself</b>",
     "Less <b>useless creatures</b> means more oxygen for the rest of us",
+    "kys lmao",
   ];
 
-  /* Creates # of speech bubbles and assigns them a random entry from the above array */
-  function addMsg() {
-    maxBubbles = 35;
+  let maxBubbles = 35;
 
-    // Insert custom messages
-    for (let i = 0; i <= maxBubbles; i++) {
+  // Creates maxBubbles of speech bubbles and assigns them a random entry from toxicMsgs array
+  for (let i = 0; i <= maxBubbles; i++) {
 
-      // Create new p element with a class of "bubble" that selects a random message from the toxicMsgs array and puts it in the p
-      let newBubble = document.createElement("p");
-      newBubble.className = "bubble";
-      newBubble.innerHTML = `${toxicMsgs[Math.floor(Math.random() * toxicMsgs.length)]} `;
+    // Create new p element with a class of "bubble" then inserts a random message from the toxicMsgs array and puts it in the p
+    let newBubble = document.createElement("p");
+    newBubble.className = "bubble";
+    newBubble.innerHTML = `${toxicMsgs[Math.floor(Math.random() * toxicMsgs.length)]} `;
 
-      commentsSection.appendChild(newBubble);
+    commentsSection.appendChild(newBubble);
 
-      if (i == maxBubbles) {
-        displayMsgs();
-      }
-
-      // Makes the bubbles draggable within any area of the window
-      Draggable.create('.bubble', {});
-      Draggable.zIndex = 900;
-    }
+    // Makes the bubbles draggable within any area of the window
+    Draggable.create('.bubble', {});
+    Draggable.zIndex = 900;
   }
+
+  // Timeline to stagger the entry of each bubble
+  let bubbleSequence = gsap.timeline({
+    defaults: {
+      delay: 0.5,
+      scale: 0,
+      transformOrigin: "0 0",
+      stagger: {
+        amount: 8,
+        ease: "power2.in",
+      }
+    }
+  })
+  .from(".bubble", {paused: true})
+  .to(".bubble", {
+    scale: 1,
+    transformOrigin: "0% 100%"
+  })
 
   /* Function that calculates the position of each bubble and the browser window, then absolute positions the bubbles randomly across the screen */
   function displayMsgs() {
 
-    const msgBubbles = document.querySelectorAll(".bubble");
-
-    // Timeline to stagger the entry of each bubble
-    let bubbleTimeline = new gsap.timeline({
-      defaults: {
-        delay: 0.5,
-        scale: 0,
-        transformOrigin: "0 0",
-        stagger: {
-          amount: 8,
-          ease: "power2.in",
-        }
-      }
-    })
-
-    // Speech bubbles scale into view from the bottom left anchor point
-    bubbleTimeline.from(msgBubbles, {})
-      .to(msgBubbles, {
-        scale: 1,
-        transformOrigin: "0% 100%"
-      })
+    let msgBubbles = document.querySelectorAll(".bubble");
 
     // Loops through each individual message and adds a timeline to each one, as well as positioning each message randomly within the browser window.
     msgBubbles.forEach((speechBubble, index) => {
@@ -170,6 +164,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Hide intro; show warning
         introSection.classList.toggle("hidden");
         warningSection.classList.toggle("hidden");
+        warningSequence.play(0);
         break;
       case "Proceed":
         startBtn.innerHTML = "Restart";
@@ -178,7 +173,9 @@ document.addEventListener('DOMContentLoaded', function () {
         commentsSection.classList.remove("hidden");
         infoSection.classList.toggle("hidden");
         clrBtn.classList.toggle("hidden");
-        addMsg();
+        displayMsgs();
+        infoSequence.play(0);
+        bubbleSequence.play(0);
         break;
       case "Restart":
         startBtn.innerHTML = "Get Started";
@@ -189,8 +186,6 @@ document.addEventListener('DOMContentLoaded', function () {
         clrBtn.classList.toggle("hidden");
         // Restarts timelines
         introSequence.play(0);
-        warningSequence.play(0);
-        infoSequence.play(0);
     }
   });
 
