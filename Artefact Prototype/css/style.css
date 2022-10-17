@@ -35,8 +35,7 @@ body {
     background: linear-gradient(15deg, rgba(6, 9, 14, 1) 0%, rgba(41, 49, 68, 1) 80%, rgba(27, 37, 62, 1) 100%);
     background-attachment: fixed;
     font-size: 20px;
-    /* padding: 3em 4em; */
-    font-family: "Poppins", sans-serif;
+    font-family: "Fraktion", monospace;
     line-height: 1.5;
 }
 
@@ -62,7 +61,6 @@ button {
     color: #333;
     padding: 16px;
     font-weight: 600;
-    font-family: "Fraktion", monospace;
     border: none;
 }
 
@@ -83,6 +81,15 @@ h2,
 h3 {
     margin: 0;
     padding: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+h2 {
+    font-size: 1.25em;
+}
+
+h3 {
+    font-size: 1em;
 }
 
 p,
@@ -90,6 +97,15 @@ ul {
     margin: 0 0 1em;
     padding: 0;
     list-style: none;
+}
+
+a {
+    color: var(--alt-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 /* Header */
@@ -123,12 +139,6 @@ img {
     border-bottom: 4px solid rgba(144, 198, 243, 0.75);
 }
 
-/* Warning Text */
-.warning {
-    position: fixed;
-    z-index: 999;
-}
-
 /* Speech Bubbles */
 .bubble,
 .exampleBubble {
@@ -141,27 +151,21 @@ img {
     font-weight: bold;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     cursor: pointer;
+    font-family: "Poppins", sans-serif;
 }
 
 .bubble:hover {
     outline: 3px solid var(--alt-color);
 }
 
-/* .bubble:before {
-    content: "";
-    width: 0px;
-    height: 0px;
-    position: absolute;
-    border-left: 24px solid var(--main-color);
-    border-right: 12px solid transparent;
-    border-top: 12px solid var(--main-color);
-    border-bottom: 20px solid transparent;
-    left: 32px;
-    bottom: -24px;
-} */
-
 .bubble b {
     font-size: 1.25em;
     font-weight: 800;
     text-transform: uppercase;
+}
+
+/* Warning Section */
+
+#warning p {
+    font-family: "Poppins", sans-serif;
 }
