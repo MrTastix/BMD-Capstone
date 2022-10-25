@@ -87,7 +87,12 @@ document.addEventListener('DOMContentLoaded', function () {
     "Don't be so offended",
     "<b>Kill yourself</b>",
     "Less <b>useless creatures</b> means more oxygen for the rest of us",
-    "kys lmao",
+    "I wouldn't even get up if I looked that <b>ugly</b>",
+    "<b>You suck!</b>",
+    "Stop being so <b>weak</b>",
+    "You're <b>not a real fan</b>",
+    "Grow the fuck up!",
+    "You need a <b>thicker skin</b>"
   ];
 
   let maxBubbles = 35;
@@ -113,16 +118,16 @@ document.addEventListener('DOMContentLoaded', function () {
       delay: 0.5,
       scale: 0,
       transformOrigin: "0 0",
-      stagger: {
-        amount: 8,
-        ease: "power2.in",
-      }
     }
   })
   .from(".bubble", {paused: true})
   .to(".bubble", {
     scale: 1,
-    transformOrigin: "0% 100%"
+    transformOrigin: "0% 100%",
+    stagger: {
+      amount: 8,
+      ease: "power2.Out"
+    }
   })
 
   /* Function that calculates the position of each bubble and the browser window, then absolute positions the bubbles randomly across the screen */
