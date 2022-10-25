@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
     "Just <b>toughen up</b> bro",
     "Some people need to <b>die and make room</b>",
     "You're a fucking <b>casual</b>",
-    "Have you tried <b>getting good</b>",
+    "Fuck man, <b>you're really not good</b> at this game aren't you",
     "You are a <b>waste of space</b>",
     "Don't be so offended",
     "<b>Kill yourself</b>",
@@ -92,7 +92,11 @@ document.addEventListener('DOMContentLoaded', function () {
     "Stop being so <b>weak</b>",
     "You're <b>not a real fan</b>",
     "Grow the fuck up!",
-    "You need a <b>thicker skin</b>"
+    "You need a <b>thicker skin</b>",
+    "This is why <b>people don't talk to you</b>",
+    "And you wonder why <b>no one likes you</b>",
+    "Why are you always like this?",
+    "You're so difficult sometimes"
   ];
 
   let maxBubbles = 35;
