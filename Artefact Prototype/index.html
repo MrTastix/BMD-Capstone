@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>> TRMNL_</title>
+    <title>DARK MSGS_ - Experience cyberbullying</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Poppins:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700;1,800&family=Oswald&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700;1,800&family=Oswald&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
@@ -19,29 +19,86 @@
 
     <div class="wrapper">
         <header>
-            <img src="imgs/trmnl_logo.svg" alt="">
+            <img src="imgs/darkmsgs_logo.svg" alt="DARK MESSAGES - Experience cyberbullying">
         </header>
 
         <main>
 
             <section class="typewriter">
-                <div class="intro">
+                <div id="intro">
                     <span class="intro__firstLine"></span>
                     <span class="intro__secondLine"></span>
                     <span class="cursor">&nbsp;</span>
                 </div>
             </section>
 
-            <button>Get Started</button>
+            <section id="warning" class="hidden">
+                <div class="grid">
+                    <div class="item">
+                        <p><b>Warning</b></p>
+                        <p>Racist and offensive language</p>
+                        <p>Look for this button to clear the screen at any time:</p>
+                        <button>Clear Screen</button>
+                    </div>
+                    <div class="item">
+                        <p class="exampleBubble">Drag me in any direction to move!</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="info" class="hidden">
+                <div class="grid">
+                    <div class="item">
+                        <h2>Support is available</h2>
+                        <p>If the experience of this website has been distressing for you, please ask for help.</p>
+                        <ul>
+                            <li><a href="https://www.lifeline.org.nz/services/lifeline-helpline/" alt="Lifeline"
+                                    target="_blank">Lifeline</a></li>
+                            <li><a href="https://www.youthline.co.nz/" alt="Youthline" target="_blank">Youthline</a>
+                            </li>
+                        </ul>
+                        <h2>Where to report cyberbullying</h2>
+                        <p>If you have experienced or witnessed an incident of cyberbullying, please report it to:</p>
+                        <h3>Netsafe</h3>
+                        <ul>
+                            <li>Email: <a href="mailto:help@netsafe.org.nz"
+                                    alt="Report an incident to Netsafe via email">help@netsafe.org.nz</a></li>
+                            <li>Freephone: 0508 NETSAFE (0508 638 723)</li>
+                            <li><a href="https://report.netsafe.org.nz/hc/en-au/requests/new"
+                                    alt="Report an incident to Netsafe online">Submit a report online</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- <div class="item">
+                        <h3>Interviews with receivers of cyberbullying</h3>
+                        <p>The following are the real experiences of those who have been cyberbullied.</p>
+                        <ul>
+                            <li><iframe src="https://www.youtube.com/embed/WdYt-OM2Xng" title="YouTube video player"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe></li>
+                            <li><iframe src="https://www.youtube.com/embed/P77xCJ1waDM" title="YouTube video player"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe></li>
+                        </ul>
+                    </div> -->
+                </div>
+            </section>
+
+            <div class="buttons">
+                <button class="start">Get Started</button>
+                <button class="clear hidden">Clear Screen</button>
+            </div>
         </main>
     </div>
 
-    <section class="comments hidden" id="firstMsgSet">
-
+    <section id="comments" class="hidden">
     </section>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.6/TextPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/Draggable.min.js"></script>
     <script src="https://unpkg.com/split-type"></script>
     <script src="js/main.js"></script>
 
