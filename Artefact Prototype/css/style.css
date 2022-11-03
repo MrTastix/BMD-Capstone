@@ -1,5 +1,4 @@
 /* Variables */
-
 :root {
     --main-color: #218ce6;
     --alt-color: #90c6f3;
@@ -29,18 +28,17 @@ html {
 }
 
 body {
-    height: calc(100vh - 14em);
     color: var(--white);
     background: var(--black);
     background: linear-gradient(15deg, rgba(6, 9, 14, 1) 0%, rgba(41, 49, 68, 1) 80%, rgba(27, 37, 62, 1) 100%);
     background-attachment: fixed;
-    font-size: 20px;
+    font-size: 16px;
     font-family: "Fraktion", monospace;
-    line-height: 1.5;
+    line-height: 1.25;
 }
 
 .wrapper {
-    padding: 6em;
+    padding: 1em 1em;
 }
 
 .hidden {
@@ -72,7 +70,7 @@ button:hover {
 .buttons {
     bottom: 0;
     z-index: 999;
-    margin: 6em 0;
+    margin: 1em 0;
     position: fixed;
 }
 
@@ -119,11 +117,9 @@ header img {
 }
 
 /* Main Grid */
-
 .grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12em;
+    display: block;
+    grid-template-columns: 1fr;
 }
 
 /* Typewriter Effect */
@@ -155,6 +151,11 @@ header img {
     font-family: "Poppins", sans-serif;
 }
 
+.exampleBubble{
+    margin-top: 1em;
+    position: static;
+}
+
 .bubble:hover,
 .exampleBubble:hover {
     outline: 3px solid var(--alt-color);
@@ -167,7 +168,10 @@ header img {
 }
 
 /* Warning Section */
-
 #warning h2 {
     margin: 0 0 1em;
+}
+
+#info {
+    margin-bottom: 8em;
 }

@@ -1,0 +1,43 @@
+/* Media Queries */
+
+@media screen and (min-width: 700px) {
+    body {
+        font-size: 20px;
+        line-height: 1.5;
+    }
+
+    .wrapper {
+        padding: 6em;
+    }
+
+    .buttons {
+        margin: 6em 0;
+        left: unset;
+        transform: unset;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12em;
+    }
+
+    .bubble,
+    .exampleBubble {
+        position: fixed;
+        background-color: var(--main-color);
+        max-width: 500px;
+        padding: 28px;
+        border-radius: 28px;
+        display: inline-block;
+        font-weight: bold;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+        font-family: "Poppins", sans-serif;
+    }
+
+    #info {
+        margin-bottom: unset;
+    }
+
+}
