@@ -97,7 +97,9 @@ document.addEventListener('DOMContentLoaded', function () {
     "And you wonder why <b>no one likes you</b>",
     "Why are you always like this?",
     "You're so difficult sometimes",
-    "Fuck off <b>you loser</b>"
+    "Fuck off <b>you loser</b>",
+    "God you're <b>stupid</b>",
+    "Stop being such a <b>whiny bitch</b>"
   ];
 
   let maxBubbles = 35;
