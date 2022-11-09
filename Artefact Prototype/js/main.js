@@ -28,21 +28,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Website intro text
   introSequence.to(".intro__firstLine", {
-      text: {
-        value: "30% of New Zealand teens experience online bullying everyday.<br />"
-      },
+      text: "30% of New Zealand teens experience online bullying everyday.<br /><br />",
       duration: 3,
       delay: 0,
       ease: "none"
     })
     .to(".intro__secondLine", {
-      text: {
-        value: "This is what it feels like."
-      },
+      text: "This is what it feels like.",
       duration: 2,
       delay: 0.75,
       ease: "none"
-    })
+    });
 
   ////////////////////////////
   // SECTION TRANSISITIONS //
@@ -60,7 +56,8 @@ document.addEventListener('DOMContentLoaded', function () {
     duration: 2,
     delay: 0.5,
     ease: "power2.in"
-  });
+  })
+
 
   infoSequence.fromTo("#info", {
     paused: true,
@@ -102,40 +99,86 @@ document.addEventListener('DOMContentLoaded', function () {
     "Stop being such a <b>whiny bitch</b>"
   ];
 
-  let maxBubbles = 35;
+  // Extremely crude way of lowering the bubble limit on mobile
+  // Too repetitive!
+  if (window.screen.width <= 1024) {
+    let maxBubbles = 12;
 
-  // Creates maxBubbles of speech bubbles and assigns them a random entry from toxicMsgs array
-  for (let i = 0; i <= maxBubbles; i++) {
+    // Creates maxBubbles of speech bubbles and assigns them a random entry from toxicMsgs array
+    for (let i = 0; i <= maxBubbles; i++) {
 
-    // Create new p element with a class of "bubble" then inserts a random message from the toxicMsgs array and puts it in the p
-    let newBubble = document.createElement("p");
-    newBubble.className = "bubble";
-    newBubble.innerHTML = `${toxicMsgs[Math.floor(Math.random() * toxicMsgs.length)]} `;
+      // Create new p element with a class of "bubble" then inserts a random message from the toxicMsgs array and puts it in the p
+      let newBubble = document.createElement("p");
+      newBubble.className = "bubble";
+      newBubble.innerHTML = `${toxicMsgs[Math.floor(Math.random() * toxicMsgs.length)]} `;
 
-    commentsSection.appendChild(newBubble);
+      commentsSection.appendChild(newBubble);
 
-    // Makes the bubbles draggable within any area of the window
-    Draggable.create('.bubble', {});
-    Draggable.zIndex = 900;
+      // Makes the bubbles draggable within any area of the window
+      Draggable.create('.bubble', {});
+      Draggable.zIndex = 900;
+    }
+  } else {
+    let maxBubbles = 35;
+
+    // Creates maxBubbles of speech bubbles and assigns them a random entry from toxicMsgs array
+    for (let i = 0; i <= maxBubbles; i++) {
+
+      // Create new p element with a class of "bubble" then inserts a random message from the toxicMsgs array and puts it in the p
+      let newBubble = document.createElement("p");
+      newBubble.className = "bubble";
+      newBubble.innerHTML = `${toxicMsgs[Math.floor(Math.random() * toxicMsgs.length)]} `;
+
+      commentsSection.appendChild(newBubble);
+
+      // Makes the bubbles draggable within any area of the window
+      Draggable.create('.bubble', {});
+      Draggable.zIndex = 900;
+    }
   }
+
+  // Sorting out the DM sound effects
+  let sound = new Howl({
+    src: ['supermarket-pa.mp3']
+  });
+
+  function dmPing() {
+    sound.play();
+    Howler.volume(0.5);
+  }
+
+  // Separate timeline for the audio
+  let bubbleAudio = gsap.timeline({
+      defaults: {
+        delay: 0.5,
+      }
+    })
+    .call(dmPing)
+    .repeat(3)
+    .fromTo(".bubble", {
+      paused: true,
+    }, {
+    });
 
   // Timeline to stagger the entry of each bubble
   let bubbleSequence = gsap.timeline({
-    defaults: {
-      delay: 0.5,
-      scale: 0,
-      transformOrigin: "0 0",
-    }
-  })
-  .from(".bubble", {paused: true})
-  .to(".bubble", {
-    scale: 1,
-    transformOrigin: "0% 100%",
-    stagger: {
-      amount: 8,
-      ease: "power2.Out"
-    }
-  })
+      defaults: {
+        delay: 0.5,
+        scale: 0,
+        transformOrigin: "0 0",
+      }
+    })
+    .from(".bubble", {
+      paused: true
+    })
+    .to(".bubble", {
+      scale: 1,
+      transformOrigin: "0% 100%",
+      stagger: {
+        amount: 8,
+        ease: "power2.Out"
+      }
+    })
 
   /* Function that calculates the position of each bubble and the browser window, then absolute positions the bubbles randomly across the screen */
   function displayMsgs() {
@@ -188,6 +231,7 @@ document.addEventListener('DOMContentLoaded', function () {
         displayMsgs();
         infoSequence.play(0);
         bubbleSequence.play(0);
+        bubbleAudio.play(0);
         break;
       case "Restart":
         startBtn.innerHTML = "Get Started";
@@ -208,5 +252,8 @@ document.addEventListener('DOMContentLoaded', function () {
   // Draggable example button
   Draggable.create('.exampleBubble', {});
   Draggable.zIndex = 900;
+
+  // Buttons fade into view after text fade-in
+
 
 })
