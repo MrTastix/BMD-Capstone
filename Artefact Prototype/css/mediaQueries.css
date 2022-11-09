@@ -5,11 +5,11 @@
         padding: 3em;
     }
 
-    .buttons {
-        margin: 3em 0;
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12em;
     }
-
-
 }
 
 @media screen and (min-width: 1180px) {
@@ -23,15 +23,9 @@
     }
 
     .buttons {
-        margin: 6em 0;
+        margin: 3em 0;
         left: unset;
         transform: unset;
-    }
-
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12em;
     }
 
     .bubble,
